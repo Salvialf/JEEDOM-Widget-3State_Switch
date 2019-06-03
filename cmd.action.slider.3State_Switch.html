@@ -1,0 +1,91 @@
+<!-- ** Forked from https://codepen.io/yaseeno/pen/YMMmrO ** -->
+<div style="width:190px;height:45px;padding:5px;" class="cmd cmd-widget" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+  <center><div class="switch_3_ways_v2#uid#">
+    <div id="monthly2#uid#" class="switch2#uid# monthly#uid#">ON</div>
+    <div id="semester2#uid#" class="switch2#uid# semester#uid#">AUTO</div>
+    <div id="annual2#uid#" class="switch2#uid# annual#uid#">OFF</div>
+     <div id="selector#uid#" class="selector#uid#"></div>
+  </div></center>
+<script>
+  jeedom.cmd.update['#id#'] = function(_options){
+  var monthly = document.getElementById("monthly2#uid#");
+  var semester = document.getElementById("semester2#uid#");
+  var annual = document.getElementById("annual2#uid#");
+  var selector = document.getElementById("selector#uid#");
+    if (_options.display_value == 1){
+    selector.style.left = 0;
+    selector.style.width = monthly.clientWidth + "px";
+    selector.style.backgroundColor = "green";
+    selector.innerHTML = "ON";
+    }else if (_options.display_value == 2){
+    selector.style.left = monthly.clientWidth + "px";
+    selector.style.width = semester.clientWidth + "px";
+    selector.innerHTML = "AUTO";
+    selector.style.backgroundColor = "#418d92";
+    }else if (_options.display_value == 0){
+    selector.style.left = monthly.clientWidth + semester.clientWidth + 1 + "px";
+    selector.style.width = annual.clientWidth + "px";
+    selector.innerHTML = "OFF";
+    selector.style.backgroundColor = "red";
+  	}else {
+    selector.style.left = "16px";
+    selector.style.width = "143px";
+    selector.innerHTML = "VALUE ERROR";
+    selector.style.backgroundColor = "orange";
+    }
+    
+    $('.monthly#uid#').on('click', function() {
+      jeedom.cmd.execute({id: '#id#', value: ('1')});});
+    $('.semester#uid#').on('click', function() {
+      jeedom.cmd.execute({id: '#id#', value: ('2')});});
+    $('.annual#uid#').on('click', function() {
+      jeedom.cmd.execute({id: '#id#', value: ('0')});});
+  }
+  jeedom.cmd.update['#id#']({display_value:'#state#'});
+</script>
+  <style>
+.switch_3_ways_v2#uid#{
+  margin:auto;
+  color:#D0D0D0;
+  border:solid 1px #5B5B5B;
+  font-size:1em;
+  font-weight:bold;
+  height:2em;
+  line-height:2em;
+  border-radius:0.3em;
+  background:grey;
+  position:relative;
+  display:block;
+  float:left;
+}
+.switch2#uid#.monthly#uid#,
+.switch2#uid#.semester#uid#,
+.switch2#uid#.annual#uid#{
+  cursor:pointer;
+  position:relative;
+  display:block;
+  float:left;
+  -webkit-transition: 300ms ease-out;
+  -moz-transition: 300ms ease-out;
+  transition: 300ms ease-out;
+  padding: 0 1em;
+}
+.selector#uid#{
+  margin-top:-2px;
+  text-align:center;
+  position:absolute;
+  width:0;
+  box-sizing:border-box;
+  -webkit-transition: 300ms ease-out;
+  -moz-transition: 300ms ease-out;
+  transition: 300ms ease-out;
+  border-radius:0.3em;
+  border:solid 1px white;
+  color:white;
+  -moz-box-shadow: 0px 2px 13px 0px #9b9b9b;
+  -webkit-box-shadow: 0px 2px 13px 0px #9b9b9b;
+  -o-box-shadow: 0px 2px 13px 0px #9b9b9b;
+  box-shadow: 0px 2px 13px 0px #9b9b9b;
+}
+  </style>
+</div>
