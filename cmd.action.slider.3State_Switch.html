@@ -1,31 +1,39 @@
 <!-- ** Forked from https://codepen.io/yaseeno/pen/YMMmrO ** -->
-<div style="width:190px;height:45px;padding:5px;" class="cmd cmd-widget" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
-  <center><div class="switch_3_ways_v2#uid#">
-    <div id="monthly2#uid#" class="switch2#uid# monthly#uid#">ON</div>
-    <div id="semester2#uid#" class="switch2#uid# semester#uid#">AUTO</div>
-    <div id="annual2#uid#" class="switch2#uid# annual#uid#">OFF</div>
-     <div id="selector#uid#" class="selector#uid#"></div>
+<div style="min-width:210px;padding:5px;" class="cmd cmd-widget" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#">
+  <center><div style="font-weight:bold;font-size:12px;#hideCmdName#">#name_display#</div>
+    <div class="switch_3_ways_v2#uid#">
+    <div id="monthly2#uid#" class="switch2#uid# monthly#uid#"></div>
+    <div id="semester2#uid#" class="switch2#uid# semester#uid#"></div>
+    <div id="annual2#uid#" class="switch2#uid# annual#uid#"></div>
+    <div id="selector#uid#" class="selector#uid#"></div>
   </div></center>
 <script>
   jeedom.cmd.update['#id#'] = function(_options){
+    var value0 = ('#texte0#' !='#'+'texte0#') ? "#texte0#":"OFF";
+    var value1 = ('#texte1#' !='#'+'texte1#') ? "#texte1#":"ON";
+    var value2 = ('#texte2#' !='#'+'texte2#') ? "#texte2#":"AUTO";
   var monthly = document.getElementById("monthly2#uid#");
   var semester = document.getElementById("semester2#uid#");
   var annual = document.getElementById("annual2#uid#");
   var selector = document.getElementById("selector#uid#");
+    annual.innerHTML = value0;
+    monthly.innerHTML = value1;
+    semester.innerHTML = value2;
+    
     if (_options.display_value == 1){
     selector.style.left = 0;
     selector.style.width = monthly.clientWidth + "px";
     selector.style.backgroundColor = "green";
-    selector.innerHTML = "ON";
+    selector.innerHTML = value1;
     }else if (_options.display_value == 2){
     selector.style.left = monthly.clientWidth + "px";
     selector.style.width = semester.clientWidth + "px";
-    selector.innerHTML = "AUTO";
+    selector.innerHTML = value2;
     selector.style.backgroundColor = "#418d92";
     }else if (_options.display_value == 0){
     selector.style.left = monthly.clientWidth + semester.clientWidth + 1 + "px";
     selector.style.width = annual.clientWidth + "px";
-    selector.innerHTML = "OFF";
+    selector.innerHTML = value0;
     selector.style.backgroundColor = "red";
   	}else {
     selector.style.left = "16px";
@@ -45,7 +53,7 @@
 </script>
   <style>
 .switch_3_ways_v2#uid#{
-  margin:auto;
+  margin:5px 10px 10px 10px;
   color:#D0D0D0;
   border:solid 1px #5B5B5B;
   font-size:1em;
