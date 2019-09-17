@@ -17,15 +17,13 @@ Il est possible de personnaliser le libellé des cases via 3 paramètres optionn
 - **texte1**: correspond au texte pour la valeur "1" *("ON" par défaut)*.
 - **texte2**: correspond au texte pour la valeur "2" *("AUTO" par défaut)*.
 
-Il est possible de personnaliser le libellé des cases via 3 paramètres optionnels ayant pour valeur le texte voulu et pour nom:
+Il est possible de personnaliser la couleur des cases via 3 paramètres optionnels ayant pour valeur là couleur voulue et pour nom:
 - **color0**: couleur de la case pour la valeur "0" *("red" par défaut)*.
 - **color1**: couleur de la case pour la valeur "1" *("green" par défaut)*.
 - **color2**: couleur de la case pour la valeur "2" *("#418d92" par défaut)*.
 
 
->Paramètres:
->**vertical**=*1* / **texte0**=*ÉTEINT* / **texte1**=*ALLUMÉ* / **texte2**=*STROBE*  
->**color0**=*tomato* / **color1**=*lime* / **color2**=*orange* :  
+>**vertical**=*1* / **texte0**=*ÉTEINT* / **texte1**=*ALLUMÉ* / **texte2**=*STROBE* / **color0**=*tomato* / **color1**=*lime* / **color2**=*orange* :  
 ><img src="/doc/params.jpg" alt="parametres"/>  
 >
 ><img src="/doc/exemple.gif" alt="exemple"/>
