@@ -1,0 +1,145 @@
+<!-- ** Forked from https://codepen.io/yaseeno/pen/YMMmrO ** -->
+<div class="tooltips cmd cmd-widget" data-type="action" data-subtype="slider" data-cmd_id="#id#" data-cmd_uid="#uid#" data-version="#version#" data-eqLogic_id="#eqLogic_id#">
+  <div class="title #hide_name#">
+    <div class="cmdName">#name_display#</div>
+  </div>
+  <div class="switch_3_ways_v2#uid#">
+    <div id="monthly2#uid#" class="switch2#uid# monthly#uid#"></div>
+    <div id="semester2#uid#" class="switch2#uid# semester#uid#"></div>
+    <div id="annual2#uid#" class="switch2#uid# annual#uid#"></div>
+    <div id="selector#uid#" class="selector#uid#"></div>
+  </div>
+  <span class="timeCmd#uid# timeCmd label label-default"></span>
+<style>
+.switch_3_ways_v2#uid#{
+  margin:5px 10px 10px 10px;
+  color:#D0D0D0;
+  border:solid 1px #5B5B5B;
+  font-size:1em;
+  font-weight:bold;
+  line-height:2em;
+  border-radius:0.3em;
+  background:grey;
+  position:relative;
+  display:block;
+  box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.75) inset,0px 2px 2px 0px rgba(255, 255, 255, 0.5);
+}
+.switch2#uid#.monthly#uid#,
+.switch2#uid#.semester#uid#,
+.switch2#uid#.annual#uid#{
+  cursor:pointer;
+  position:relative;
+  display:block;
+  -webkit-transition: 300ms ease-out;
+  -moz-transition: 300ms ease-out;
+  transition: 300ms ease-out;
+  padding: 0 1em;
+}
+.selector#uid#{
+  text-align:center;
+  position:absolute;
+  width:0;
+  box-sizing:border-box;
+  -webkit-transition: 300ms ease-out;
+  -moz-transition: 300ms ease-out;
+  transition: 300ms ease-out;
+  border-radius:0.3em;
+  border:solid 0.5px white;
+  color:white;
+  text-shadow: 1px 1px 3px #000;
+  box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.75),0px 2px 13px 0px #9b9b9b,0px 2px 2px 0px rgba(255, 255, 255, 0.5) inset;
+}
+</style>
+<script>
+  jeedom.cmd.update['#id#'] = function(_options){
+    var value0 = ('#texte0#' !='#'+'texte0#') ? "#texte0#":"OFF";
+    var value1 = ('#texte1#' !='#'+'texte1#') ? "#texte1#":"ON";
+    var value2 = ('#texte2#' !='#'+'texte2#') ? "#texte2#":"AUTO";
+    var color0 = ('#color0#' !='#'+'color0#') ? "#color0#":"red";
+    var color1 = ('#color1#' !='#'+'color1#') ? "#color1#":"green";
+    var color2 = ('#color2#' !='#'+'color2#') ? "#color2#":"#418d92";
+
+  var monthly = document.getElementById("monthly2#uid#");
+  var semester = document.getElementById("semester2#uid#");
+  var annual = document.getElementById("annual2#uid#");
+  var selector = document.getElementById("selector#uid#");
+    annual.innerHTML = value0;
+    monthly.innerHTML = value1;
+    semester.innerHTML = value2;
+    
+    if ('#vertical#' == "1"){
+    if (_options.display_value == 1){
+    selector.style.top = 0;
+    selector.style.width = monthly.clientWidth + "px";
+    selector.style.backgroundColor = color1;
+    selector.innerHTML = value1;
+    }else if (_options.display_value == 2){
+    selector.style.top = monthly.clientHeight + "px";
+    selector.style.width = semester.clientWidth + "px";
+    selector.innerHTML = value2;
+    selector.style.backgroundColor = color2;
+    }else if (_options.display_value == 0){
+    selector.style.top = monthly.clientHeight + semester.clientHeight + 1 + "px";
+    selector.style.width = annual.clientWidth + "px";
+    selector.innerHTML = value0;
+    selector.style.backgroundColor = color0;
+  	}else {
+    monthly.innerHTML = "*";
+    annual.innerHTML = "*";
+    selector.style.top = monthly.clientHeight + "px";
+    selector.style.width = semester.clientWidth + "px";
+    selector.innerHTML = "ERROR";
+    selector.style.backgroundColor = "orange";
+    }}
+    
+    else {
+    $('.switch_3_ways_v2#uid#').css('height','2em');
+    $('.switch2#uid#').css('float','left');
+    if (_options.display_value == 1){
+    selector.style.left = 0;
+    selector.style.width = monthly.clientWidth + "px";
+    selector.style.backgroundColor = color1;
+    selector.innerHTML = value1;
+    }else if (_options.display_value == 2){
+    selector.style.left = monthly.clientWidth + "px";
+    selector.style.width = semester.clientWidth + "px";
+    selector.innerHTML = value2;
+    selector.style.backgroundColor = color2;
+    }else if (_options.display_value == 0){
+    selector.style.left = monthly.clientWidth + semester.clientWidth + 1 + "px";
+    selector.style.width = annual.clientWidth + "px";
+    selector.innerHTML = value0;
+    selector.style.backgroundColor = color0;
+  	}else {
+    monthly.innerHTML = "*";
+    annual.innerHTML = "*";
+    selector.style.left = monthly.clientWidth + "px";
+    selector.style.width = semester.clientWidth + "px";
+    selector.innerHTML = "ERROR";
+    selector.style.backgroundColor = "orange";
+    }}
+    
+    $('.monthly#uid#').on('click', function() {
+      jeedom.cmd.execute({id: '#id#', value: ('1')});});
+    $('.semester#uid#').on('click', function() {
+      jeedom.cmd.execute({id: '#id#', value: ('2')});});
+    $('.annual#uid#').on('click', function() {
+      jeedom.cmd.execute({id: '#id#', value: ('0')});});
+if ('#time#' == 'duree') {  
+        jeedom.cmd.displayDuration(_options.valueDate,  $('.cmd[data-cmd_id=#id#] .timeCmd'));
+          }
+      else if ('#time#' == 'date') {
+      	var date = new Date(_options.valueDate);
+		var format = $.datepicker.formatDate('D dd/mm', date);
+		var time = "à "+date.getHours()+":"+(date.getMinutes()<10?'0':'')+date.getMinutes();
+        $('.cmd[data-cmd_id=#id#] .timeCmd').html(format+'<br>'+time);
+      	}
+      else if ('#time#' == 'heure') {
+        var date = new Date(_options.valueDate);
+        var time = "à "+date.getHours()+":"+(date.getMinutes()<10?'0':'')+date.getMinutes()+":"+(date.getSeconds()<10?'0':'')+date.getSeconds()+"";
+        $('.cmd[data-cmd_id=#id#] .timeCmd').html(time);
+      	}
+		}
+      	jeedom.cmd.update['#id#']({display_value:'#state#',valueDate:'#valueDate#',collectDate:'#collectDate#',alertLevel:'#alertLevel#'})
+  </script>
+</div>
